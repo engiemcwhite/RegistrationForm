@@ -1,0 +1,33 @@
+<html>
+    <head>
+       <title>Survey Index</title>
+       <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+    </head>
+    <body>
+        <h1>New Dojo</h1>
+        <h3>Create a User</h3>
+        <!-- read on to learn about form actions, we'll talk about the method in a later section -->
+        <form action='/results' method='post'>
+            Email: <input type='text' name='email'><br>
+            First Name: <input type='text' name='first_name'><br>
+            Last Name: <input type='text' name='last_name'><br>
+            Password: <input type='password' name='password'><br>
+            Password Confirmation: <input type='password' name='password_confirmation'><br>
+            Birthday: <input type='date' name='birthday'>
+            {% with errors = get_flashed_messages(category_filter=["error"]) %}
+                {% with messages = get_flashed_messages(category_filter=["message"]) %}
+                    {% if errors %}
+                        {% for error in errors %}
+                            <p>{{error}}</p>
+                        {% endfor %}
+                    {% else %}
+                        {% for message in messages %}
+                            <p>{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+            {% endwith %}
+            <input type='submit' value='Submit'>
+        </form>
+    </body>
+</html>
